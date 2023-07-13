@@ -11,8 +11,8 @@ public class Decreaser implements Runnable {
     public void run() {
         for (int i = 0; i < 10; i++) {
             try {
-                ResourceProcessor.class.getMethod("decrease").invoke(resourceProcessor);
-            } catch (IllegalAccessException | InvocationTargetException | NoSuchMethodException e) {
+                resourceProcessor.decrease();
+            } catch (InterruptedException e) {
                 throw new RuntimeException(e);
             }
         }

@@ -1,19 +1,17 @@
 public class ResourceProcessor {
     public synchronized void increase() throws InterruptedException {
-        while (Resource.getField() >= 5)
+        while (Resource.getRes() >= 5)
             wait();
-        Resource.setField(Resource.getField() + 1);
-        System.out.println(Resource.getField());
-        if (Resource.getField() >= 5)
-            notify();
+        Resource.setRes(Resource.getRes() + 1);
+        System.out.println(Resource.getRes());
+        notify();
     }
 
     public synchronized void decrease() throws InterruptedException {
-        while (Resource.getField() < 1)
+        while (Resource.getRes() < 1)
             wait();
-        Resource.setField(Resource.getField() - 1);
-        System.out.println(Resource.getField());
-        if (Resource.getField() < 1)
-            notify();
+        Resource.setRes(Resource.getRes() - 1);
+        System.out.println(Resource.getRes());
+        notify();
     }
 }

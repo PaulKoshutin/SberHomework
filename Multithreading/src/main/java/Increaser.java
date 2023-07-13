@@ -6,12 +6,12 @@ public class Increaser extends Thread {
     Increaser(ResourceProcessor resourceProcessor) {
         this.resourceProcessor = resourceProcessor;
     }
-
+    @Override
     public void run() {
         for (int i = 0; i < 10; i++) {
             try {
-                ResourceProcessor.class.getMethod("increase").invoke(resourceProcessor);
-            } catch (IllegalAccessException | InvocationTargetException | NoSuchMethodException e) {
+                resourceProcessor.increase();
+            } catch (InterruptedException e) {
                 throw new RuntimeException(e);
             }
         }
