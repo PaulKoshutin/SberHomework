@@ -1,16 +1,16 @@
 public class BankOnline {
-    private String[] blockedCards = new String[]{"1111111111111111", "2222222222222222", "3333333333333333"};
-    private String[] workingCards = new String[]{"4444444444444444", "5555555555555555", "6666666666666666"};
+    private final String[] BLOCKED_CARDS = new String[]{"1111111111111111", "2222222222222222", "3333333333333333"};
+    private final String[] WORKING_CARDS = new String[]{"4444444444444444", "5555555555555555", "6666666666666666"};
 
-    public void send(String cardNumber, double money) throws InvalidCardNumberException, BlockedCardTransferException, NegativeTransferException, OutOfLimitTransferException, NullArgumentException, NoSuchCardException, PointlessTransferException {
+    public void send(String cardNumber, double money) throws BankOnlineException {
         try {
             if (cardNumber == null)
                 throw new NullArgumentException();
 
-            if (!cardNumber.matches("[0-9]+") || cardNumber.length() != 16)
+            if (!cardNumber.matches("^[0-9]{16}$"))
                 throw new InvalidCardNumberException();
 
-            for (String card : blockedCards)
+            for (String card : BLOCKED_CARDS)
                 if (cardNumber.equals(card))
                     throw new BlockedCardTransferException();
 
@@ -21,7 +21,7 @@ public class BankOnline {
                 throw new OutOfLimitTransferException();
 
             boolean cardFound = false;
-            for (String card : workingCards)
+            for (String card : WORKING_CARDS)
                 if (cardNumber.equals(card)) {
                     cardFound = true;
                     break;
@@ -31,20 +31,9 @@ public class BankOnline {
 
             if (money == 0)
                 throw new PointlessTransferException();
-        } catch (InvalidCardNumberException e) {
-            throw new InvalidCardNumberException();
-        } catch (BlockedCardTransferException e) {
-            throw new BlockedCardTransferException();
-        } catch (NegativeTransferException e) {
-            throw new NegativeTransferException();
-        } catch (OutOfLimitTransferException e) {
-            throw new OutOfLimitTransferException();
-        } catch (NullArgumentException e) {
-            throw new NullArgumentException();
-        } catch (NoSuchCardException e) {
-            throw new NoSuchCardException();
-        } catch (PointlessTransferException e) {
-            throw new PointlessTransferException();
+        } catch (InvalidCardNumberException | BlockedCardTransferException | PointlessTransferException |
+                 NoSuchCardException | NullArgumentException | OutOfLimitTransferException | NegativeTransferException e) {
+            throw new BankOnlineException();
         }
     }
 }
