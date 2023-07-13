@@ -1,7 +1,6 @@
-public class ServiceQueryValidatorA {
-    private final String queryExample = "A";
+public class ServiceQueryValidatorA implements QueryValidationInterface{
+    public void validateQuery()
+    {
 
-    public String getValue() {
-        return queryExample;
     }
 }

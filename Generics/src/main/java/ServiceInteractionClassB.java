@@ -1,7 +1,6 @@
-public class ServiceInteractionClassB {
-    private final int interExample = 1;
+public class ServiceInteractionClassB implements InteractionInterface{
+    public void interact()
+    {
 
-    public int getValue() {
-        return interExample;
     }
 }

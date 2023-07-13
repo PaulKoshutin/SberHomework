@@ -1,7 +1,6 @@
-public class ServiceAnswerValidatorB {
-    private final double answerExample = 1.1;
+public class ServiceAnswerValidatorB implements AnswerValidationInterface{
+    public void validateAnswer()
+    {
 
-    public double getValue() {
-        return answerExample;
     }
 }
